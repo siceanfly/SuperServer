@@ -6,6 +6,7 @@ add_executable(superServer
    connections.c
    fileutils.c
    opts.c
+   webserver.c
    )
 
 target_link_libraries(superServer
