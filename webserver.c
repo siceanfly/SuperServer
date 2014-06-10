@@ -23,6 +23,7 @@ void *HttpStart(void *ptr)
 //            exit(1);
 //    }
     sock = make_server_socket(4096);
+    printf("Httpserver is listening port 4096\n");
     if ( sock == -1 ) exit(2);
 
     /* main loop here */

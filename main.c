@@ -31,14 +31,14 @@ void *HttpStart(void *ptr);
 
 int main(int argc,char *argv[])
 {
-   pthread_t id;
-   int ret = pthread_create(&id,NULL,HttpStart,NULL);
-   if(ret)
+   pthread_t httpThread;
+   int retH = pthread_create(&httpThread,NULL,HttpStart,NULL);
+ 
+   if(retH)
    {
-      printf("Create pthread error!\n");
+      printf("Create Http pthread error!\n");
       return 1;
    }
-
 	struct cmd_opts *copts= malloc(sizeof(struct cmd_opts));
 	int result = pars_cmd_args(copts,argc,argv);
 	switch(result) {
@@ -49,6 +49,8 @@ int main(int argc,char *argv[])
 		default:
 			return 1;
 	}
+
+
 	return 0;
 	
 }

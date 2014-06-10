@@ -147,6 +147,7 @@ int assign_option(current_option, arg,copts,len)
 				return 2;
 			}
 			copts->port = p;
+         printf("Ftpserver is listening port %d\n",p);
 		break;
 		case 'l': // limit of the concurrent connections
 			p = toint(arg,TRUE);
