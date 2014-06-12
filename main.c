@@ -27,19 +27,14 @@
 #include "fileutils.h"
 #include <pthread.h>
 
-void *HttpStart(void *ptr);
 
-int main(int argc,char *argv[])
+void *HttpStart(void *ptr);
+void *FtpStart(void *ptr)
 {
-   pthread_t httpThread;
-   int retH = pthread_create(&httpThread,NULL,HttpStart,NULL);
- 
-   if(retH)
-   {
-      printf("Create Http pthread error!\n");
-      return 1;
-   }
-	struct cmd_opts *copts= malloc(sizeof(struct cmd_opts));
+   struct arg *s=ptr;
+   int argc = s->ac;
+   char **argv = s->av;
+   struct cmd_opts *copts= malloc(sizeof(struct cmd_opts));
 	int result = pars_cmd_args(copts,argc,argv);
 	switch(result) {
 		case 0:
@@ -50,7 +45,31 @@ int main(int argc,char *argv[])
 			return 1;
 	}
 
+}
+
+int main(int argc,char *argv[])
+{
+   struct arg *p;
+   p = (struct arg*)malloc(sizeof(struct arg));
+   p->ac = argc;
+   p->av = argv;
+   pthread_t httpThread,ftpThread;
+   int retH = pthread_create(&httpThread,NULL,HttpStart,p);
+   int retF = pthread_create(&ftpThread,NULL,FtpStart,p);
+   if(retH)
+   {
+      printf("Create Http pthread error!\n");
+      return retH;
+   }
+   if(retF)
+   {
+      printf("Create Ftp thread error!\n");
+      return retF;
+   }
+
+   pthread_join(httpThread,NULL);
+   pthread_join(ftpThread,NULL);
+   free(p);
 
 	return 0;
-	
 }

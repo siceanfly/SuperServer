@@ -121,7 +121,13 @@ extern "C"
 	int create_socket(struct cmd_opts *);
 	int pars_cmd_args(struct cmd_opts *,int argc, char *argv[]);
 	int send_repl(int send_sock,char *msg);
-	
+	struct arg
+   {
+      int ac;
+      char **av;
+   };
+
+
 #ifdef __cplusplus
 }
 #endif
