@@ -41,7 +41,7 @@ int dir_exists(const char *);
 int pars_cmd_args(struct cmd_opts *copts,int argc,char *argv[]) {
 	int len,i;
 	if(argc<2) {
-		printf("    USAGE: tinyftp [OPTIONS]\n    Run tinyftp -h for help.\n");
+		printf("    USAGE: superServer [OPTIONS]\n    Run ./superServer -h for help.\n");
 		return 1;
 	}
 	copts->daemonize    = FALSE;
@@ -248,11 +248,11 @@ int toint(str,strict)
  * of the available command line options and usage.
  */
 void print_help() {
-	printf("Usage: tinyftp [OPTIONS]\n");
-	printf(" -h,\n     Display tinyftp help\n");
+	printf("Usage: superServer [OPTIONS]\n");
+	printf(" -h,\n     Display superServer help\n");
 	printf(" -d,\n     Daemonize after startup\n");
-	printf(" -s [address],\n     Set the server address\n");
-	printf(" -p [port],\n     Set the server port \n");
+	printf(" -s [address],\n     Set the ftpserver address\n");
+	printf(" -p [port],\n     Set the ftpserver port \n");
 	printf(" -l [limit],\n     Limit to \"[limit]\" concurrent connections\n");
 	printf(" -u [userid],\n     Do filesystem operations as \"[userid]\"\n");
 	printf(" -c [directory],\n     Default directory \n");
